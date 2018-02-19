@@ -1,5 +1,13 @@
 if (window.location.pathname.indexOf('/produkt/') === 0 && $('.js-attribute')[0]) {
-	function updatePrice() {
+	updatePrice();
+
+} else if (window.location.pathname.indexOf('/produkt/') === 0 && $('optgroup')[0]) {
+	onOptionChange();
+}
+
+// Functions
+
+function updatePrice() {
 		$('.js-attribute').attr('onchange', 'updatePrice()');
 		var attributeSum = 0;
 		$('.js-attribute :selected').each(function() {
@@ -9,11 +17,9 @@ if (window.location.pathname.indexOf('/produkt/') === 0 && $('.js-attribute')[0]
 		var price = mainPrice + attributeSum;
 		price = priceToString(price);
 		$('article.product .price__display').html(price);
-	}
-	updatePrice();
+}
 
-} else if (window.location.pathname.indexOf('/produkt/') === 0 && $('optgroup')[0]) {
-	function onOptionChange() {
+function onOptionChange() {
 		var mainPrice = findMainProductPrice();
 		$('.product__attribute__control').attr('onchange', 'onOptionChange()');
 		var option = $('optgroup :selected');
@@ -37,8 +43,6 @@ if (window.location.pathname.indexOf('/produkt/') === 0 && $('.js-attribute')[0]
                 $('.price__display').html(priceToString(fullPrice));
         }
 	}
-	onOptionChange();
-}
 
 function optionNumber (opt) {
 	opt = opt.slice(2);
